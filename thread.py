@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 app_path = os.environ['APP_PATH']
 
+
 class FFMpegThreads:
     def __init__(self, max_workers=3):
         self.max_workers = max_workers
@@ -23,9 +24,3 @@ class FFMpegThreads:
         for future in concurrent.futures.as_completed(self.futures):
             print(f'Future {future} finished.')
         print('All commands finished.')
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.executor.shutdown(wait=True)
