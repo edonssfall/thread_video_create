@@ -24,3 +24,9 @@ class FFMpegThreads:
         for future in concurrent.futures.as_completed(self.futures):
             print(f'Future {future} finished.')
         print('All commands finished.')
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.executor.shutdown(wait=True)
